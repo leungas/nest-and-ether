@@ -1,0 +1,20 @@
+application:
+  env: dev
+  name: web3-tester
+  swagger: 
+    path: docs
+
+datasource:
+  type: postgres
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+  database: eth-tester
+  ssl: false
+  synchronize: true
+
+ethers:
+  host: http://127.0.0.1:8545
+  contract: '0xA3b1f56de8BD939D92223be0919826bA0CC82Bb0'
+  wallet: '0xB00C1AB5207eb42BbBC772E153e3C14C410b7C78'

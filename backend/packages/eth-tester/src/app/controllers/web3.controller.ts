@@ -48,6 +48,10 @@ export class Web3Controller {
     description: 'Successfully executex',
   })
   @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'Record already exists, so cannot prepare another one',
+  })
+  @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Problem with the service, check logs for details',
   })
@@ -89,6 +93,22 @@ export class Web3Controller {
    * @returns
    */
   @Put('records/:year/:month/:day')
+  @ApiOperation({
+    summary: 'Listing out all our chain records',
+    description: 'Getting all our records on chain with blocks and gas',
+  })
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'Successful execution',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'The specified date record is not available',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Problem with service, check logs for details',
+  })
   complete(
     @Param('year') year: number,
     @Param('month') month: number,

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { WinstonLogger, WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { EtherClient } from '../../infrastructure/clients/web3.client';
 import { RecordRepository } from '../../infrastructure/repositories/record.repository';
@@ -59,6 +59,14 @@ export class AppService {
   async prepare() {
     this.logger.debug(`Service(App)->prepare(): Enter`);
     const current = new Date();
+    if (
+      this.records.find(
+        current.getFullYear(),
+        current.getMonth(),
+        current.getDate(),
+      )
+    )
+      throw new ConflictException();
     const entity = new Rec(
       current.getFullYear(),
       current.getMonth(),
@@ -82,6 +90,7 @@ export class AppService {
     this.logger.debug(`Service(App)->finish()->$month: ${month}`);
     this.logger.debug(`Service(App)->finish()->$day: ${day}`);
     const record = await this.records.find(year, month, day);
+    if (!record) throw new NotFoundException();
     record.finishing = await this.client.getLatestBlock();
 
     // if we have blocks, write to db

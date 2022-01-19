@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { WinstonLogger, WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { EtherClient } from 'src/infrastructure/clients/web3.client';
-import { RecordRepository } from 'src/infrastructure/repositories/record.repository';
+import { EtherClient } from '../../infrastructure/clients/web3.client';
+import { RecordRepository } from '../../infrastructure/repositories/record.repository';
 import { Block } from '../entities/block.entity';
 import { Record as Rec } from '../entities/record.entity';
 

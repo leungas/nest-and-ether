@@ -53,6 +53,7 @@ export class RecordRepository {
     this.logger.debug(
       `Repo(Record)->export()->$model: ${JSON.stringify(model)}`,
     );
+    if (!model) return null;
     return new Record(
       model.year,
       model.month,

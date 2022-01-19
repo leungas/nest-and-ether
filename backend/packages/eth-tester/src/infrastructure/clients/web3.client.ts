@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { WinstonLogger, WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { EthersContract, JsonRpcProvider, Contract } from 'nestjs-ethers';
-import { Usage } from 'src/domain/entities/usage.entity';
+import { Usage } from '../../domain/entities/usage.entity';
 import abi = require('./web3/web3.abi.json');
 
 /**
@@ -42,8 +42,13 @@ export class EtherClient {
     return Object.assign(new Usage(), result);
   }
 
+  /**
+   * @method getLatestBlock
+   * @description get the latest block number from the chain
+   * @returns {Promise<number>}
+   */
   getLatestBlock() {
-    this.logger.debug(`Client(Web3)->getBlocks(): Enter`);
+    this.logger.debug(`Client(Web3)->getLatestBlock(): Enter`);
     const connection = new JsonRpcProvider(this.config.get('ethers.host'));
     return connection.getBlockNumber();
   }

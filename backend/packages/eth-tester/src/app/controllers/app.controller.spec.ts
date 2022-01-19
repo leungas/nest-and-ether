@@ -3,14 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from '../../domain/services/app.service';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { EtherClient } from '../../infrastructure/clients/web3.client';
-import { v4 as uuid } from 'uuid';
-import { RecordModel } from '../../infrastructure/models/record.model';
 import { Connection } from 'typeorm';
 import { RecordRepository } from '../../infrastructure/repositories/record.repository';
 import { ConfigService } from '@nestjs/config';
 
 describe('AppController', () => {
   let appController: AppController;
+  //eslint-disable-next-line
   let connection;
 
   // this is our magic mock
@@ -24,16 +23,6 @@ describe('AppController', () => {
     },
     transaction: jest.fn(),
   });
-
-  const mockedManager = {
-    save: jest.fn().mockImplementation(async (entity: RecordModel) => {
-      entity.id = uuid();
-      return entity;
-    }),
-    remove: jest.fn().mockImplementation(async () => {
-      return Promise.resolve();
-    }),
-  };
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({

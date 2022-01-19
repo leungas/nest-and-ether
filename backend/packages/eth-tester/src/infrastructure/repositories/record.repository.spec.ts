@@ -1,12 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Record } from '../../domain/entities/record.entity';
-import {
-  Connection,
-  FindConditions,
-  FindManyOptions,
-  FindOneOptions,
-} from 'typeorm';
+import { Connection, FindConditions, FindOneOptions } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { RecordModel } from '../models/record.model';
 import { RecordRepository } from './record.repository';
@@ -103,7 +98,7 @@ describe('SubscriptionRepository', () => {
           query.where as FindConditions<RecordModel>,
           'day',
         );
-        console.log(`${year}/${month}/${day}`)
+        console.log(`${year}/${month}/${day}`);
         if (year === 2022 && month === 0 && day === 19) {
           const result = new RecordModel();
           result.id = 1;
@@ -140,7 +135,7 @@ describe('SubscriptionRepository', () => {
           query.where as FindConditions<RecordModel>,
           'day',
         );
-        console.log(`${year}/${month}/${day}`)
+        console.log(`${year}/${month}/${day}`);
         if (year === 2022 && month === 0 && day === 19) {
           const result = new RecordModel();
           result.id = 1;
@@ -176,7 +171,7 @@ describe('SubscriptionRepository', () => {
           query.where as FindConditions<RecordModel>,
           'day',
         );
-        console.log(`${year}/${month}/${day}`)
+        console.log(`${year}/${month}/${day}`);
         if (year === 2022 && month === 0 && day === 19) {
           const result = new RecordModel();
           result.id = 1;
@@ -199,7 +194,7 @@ describe('SubscriptionRepository', () => {
     };
 
     // const result = await target.find(2022, 0, 18);
-    expect(target.update(entity)).rejects.toThrowError()
+    expect(target.update(entity)).rejects.toThrowError();
   });
 
   it('test update', async () => {
@@ -221,7 +216,7 @@ describe('SubscriptionRepository', () => {
           query.where as FindConditions<RecordModel>,
           'day',
         );
-        console.log(`${year}/${month}/${day}`)
+        console.log(`${year}/${month}/${day}`);
         if (year === 2022 && month === 0 && day === 19) {
           const result = new RecordModel();
           result.id = 1;
@@ -240,13 +235,10 @@ describe('SubscriptionRepository', () => {
       month: 0,
       day: 19,
       starting: 0,
-      blocks: [
-        new Block(1, 56718, ['some transaction'])
-      ],
+      blocks: [new Block(1, 56718, ['some transaction'])],
     };
 
     const result = await target.update(entity);
     expect(result).toBeUndefined();
   });
-
 });
